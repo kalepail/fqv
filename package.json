@@ -5,7 +5,7 @@
     "build": "stencil build --prerender",
     "start": "stencil build --dev --watch --serve",
     "generate": "stencil generate",
-    "deploy": "npm run build ; vercel deploy --prod"
+    "deploy": "vercel deploy --prod"
   },
   "devDependencies": {
     "@stencil/core": "^1.17.3",
