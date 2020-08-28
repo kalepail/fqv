@@ -1,0 +1,130 @@
+$blk: #040d14;
+$blk-bg: #f2f2f2;
+
+$rd: #e94f30;
+$rd-bg: rgba($rd, 0.3);
+
+$gr: #22995d;
+$gr-bg: rgba($gr, 0.3);
+
+app-home {
+  padding: 10px;
+  display: block;
+
+  > h1 {
+    font-size: 32px;
+    margin: 10px 10px 20px;
+  }
+  table {
+    margin: 0 10px 10px;
+
+    td {
+      padding: 0 10px 5px 0;
+      font-variant-numeric: tabular-nums;
+    }
+    td:last-of-type {
+      text-align: right;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  li {
+    width: calc((100% / 3) - 20px);
+    min-width: 360px;
+    padding: 10px;
+
+    h1 {
+      font-size: 20px;
+      background-color: $blk;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        appearance: none;
+        border: none;
+        outline: none;
+        margin: 0;
+        padding: 0 5px;
+        background-color: white;
+        overflow: hidden;
+
+        &.flagged span {
+          top: -2px;
+        }
+        &[disabled] {
+          opacity: 0.25;
+        }
+
+        span {
+          position: relative;
+          top: 10px;
+          margin-right: 5px;
+        }
+      }
+    }
+    h2 {
+      background-color: $blk-bg;
+      font-variant-numeric: tabular-nums;
+      padding: 10px;
+      line-height: 1.2;
+
+      &.positive {
+        background-color: $gr-bg;
+        color: $gr;
+      }
+      &.negative {
+        background-color: $rd-bg;
+        color: $rd;
+      }
+
+      strong {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+
+    button {
+      appearance: none;
+      border: none;
+      outline: none;
+      margin: 0;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+      white-space: nowrap;
+
+      &.down {
+        background-color: $rd-bg;
+        color: $rd;
+      }
+      &.up {
+        background-color: $gr-bg;
+        color: $gr;
+      }
+      &[disabled] {
+
+        span {
+          opacity: 0.25;
+        }
+      }
+
+      span {
+        width: 100%;
+      }
+    }
+  }
+}
