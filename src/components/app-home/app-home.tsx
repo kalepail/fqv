@@ -37,7 +37,7 @@ export class AppHome {
       ...map(entries, (entry: Entry) => entry.votes * entry.votes),
       ...map(entries, (entry: Entry) => entry.flag && entry.votes ? this.flagPrice : 0)
     ])
-    this.voteTotalReal = map(entries, (entry, i) => entry.votes * Math.abs(entry.votes) + this.voteOthersReal[i], 0)
+    this.voteTotalReal = map(entries, (entry, i) =>  this.voteOthersReal[i] + entry.votes, 0)
     this.voteTotalAbsolute = map(this.voteTotalReal, (voteTotal) => Math.max(voteTotal, 0))
     this.voteOthersAbsolute = map(this.voteOthersReal, (voteTotal) => Math.max(voteTotal, 0))
   }
@@ -50,13 +50,13 @@ export class AppHome {
     if (this.isSeedFund) {
       this.prize = 5000000
       this.flagPrice = Math.floor(this.creditsTotal / (2 + 1))
-      this.voteOthersReal = [300,250,200,150,100,3]
+      this.voteOthersReal = [30,25,20,15,10,3]
     }
 
     else {
       this.prize = 500000
       this.flagPrice = Math.floor(this.creditsTotal / (5 + 1))
-      this.voteOthersReal = [160,150,140,130,120,110,100,90,80,70,60,50]
+      this.voteOthersReal = [16,15,14,13,12,11,10,9,8,7,6,5]
     }
 
     faker.seed(this.prize)
@@ -161,7 +161,7 @@ export class AppHome {
             }>
               {
                 this.voteOthersReal[index] < 0
-                ? this.voteOthersReal[index] +' credits'
+                ? this.voteOthersReal[index] +' votes'
                 : '$'+ new BigNumber(this.voteOthersAbsolute[index])
                   .div(BigNumber.sum(...this.voteOthersAbsolute))
                   .times(this.prize)
@@ -169,9 +169,7 @@ export class AppHome {
                   .toFormat(2)
               }
               <br/>
-              {
-                entry.votes * entry.votes
-              } credits {
+              <aside>{entry.votes}</aside> votes {
                 '→ $'+ new BigNumber(this.voteTotalAbsolute[index])
                   .div(BigNumber.sum(...this.voteTotalAbsolute))
                   .minus(
@@ -203,11 +201,11 @@ export class AppHome {
                   ((entry.votes + 1) * (entry.votes + 1))
                 ) > this.creditsTotal}>
                 {
-                  entry.votes > 0 ? entry.votes : null
+                  // entry.votes > 0 ? entry.votes : null
                 } 👍 <span>
                   {
                     '+$'+ BigNumber.max(
-                        this.voteOthersReal[index] + (entry.votes + 1) * Math.abs(entry.votes + 1),
+                        this.voteOthersReal[index] + (entry.votes + 1),
                         0
                       )
                       .div(
@@ -215,7 +213,7 @@ export class AppHome {
                           ...this.voteTotalAbsolute,
                           this.voteOthersReal[index],
                           -this.voteTotalAbsolute[index],
-                          (entry.votes + 1) * Math.abs(entry.votes + 1),
+                          (entry.votes + 1),
                         )
                       )
                       .minus(
@@ -236,12 +234,12 @@ export class AppHome {
                   ((entry.votes - 1) * (entry.votes - 1))
                 ) > this.creditsTotal}>
                 {
-                  entry.votes < 0 ? Math.abs(entry.votes) : null
+                  // entry.votes < 0 ? Math.abs(entry.votes) : null
                 } 👎 <span>
                   {
                     '-$'+
                       BigNumber.max(
-                        this.voteOthersReal[index] + (entry.votes - 1) * Math.abs(entry.votes - 1),
+                        this.voteOthersReal[index] + (entry.votes - 1),
                         0
                       )
                       .div(
@@ -249,7 +247,7 @@ export class AppHome {
                           ...this.voteTotalAbsolute,
                           this.voteOthersReal[index],
                           -this.voteTotalAbsolute[index],
-                          (entry.votes - 1) * Math.abs(entry.votes - 1),
+                          (entry.votes - 1),
                         )
                       )
                       .minus(

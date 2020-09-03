@@ -78,14 +78,31 @@ app-home {
       &.positive {
         background-color: $gr-bg;
         color: $gr;
+
+        aside {
+          background-color: $gr;
+        }
       }
       &.negative {
         background-color: $rd-bg;
         color: $rd;
+
+        aside {
+          background-color: $rd;
+        }
       }
 
       strong {
         font-weight: 700;
+      }
+      aside {
+        display: inline-flex;
+        justify-content: center;
+        background-color: $blk;
+        color: white;
+        padding: 1px 4px;
+        border-radius: 5px;
+        min-width: 15px;
       }
     }
   }

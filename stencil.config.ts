@@ -15,7 +15,7 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null,
-      baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3333/' : 'https://applecardforynab.com/',
+      baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3333/' : 'https://fqv.vercel.app/',
       prerenderConfig: './prerender.config.ts',
       copy: [
         { src: 'robots.txt' }
